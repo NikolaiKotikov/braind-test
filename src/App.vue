@@ -1,28 +1,57 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+<template lang="pug">
+  div(id="app" class="container")
+    Schedule
+    Calendar
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Schedule from "./components/Schedule";
+import Calendar from "./components/Calendar";
 
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    Calendar,
+    Schedule,
+  },
+  mounted() {
+    this.$store.dispatch("setDay", {
+      type: "current",
+      dayCode: this.getCurrentDayCode(),
+    });
+    this.$store.dispatch("setDay", {
+      type: "chosen",
+      dayCode: this.getCurrentDayCode(),
+    });
+    const scheduleFromStorage = localStorage.getItem("schedule");
+    if (scheduleFromStorage) {
+      this.$store.state.schedule = JSON.parse(scheduleFromStorage);
+    }
+  },
+  methods: {
+    getLocalDay() {
+      let day = new Date().getDay();
+
+      if (day === 0) {
+        day = 7;
+      }
+
+      return day - 1;
+    },
+    getCurrentDayCode() {
+      return this.$store.state.days[this.getLocalDay()].code;
+    },
   },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "styles/global/global";
+
+.container {
+  display: grid;
+  grid-template-columns: 400px 120px;
+  column-gap: 60px;
+  padding: 110px;
 }
 </style>
