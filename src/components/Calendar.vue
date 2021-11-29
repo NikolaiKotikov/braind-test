@@ -26,11 +26,13 @@ export default {
 .calendar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-self: center;
   background-color: white;
 }
 
 .calendar__day {
+  padding-top: 3px;
+  padding-bottom: 7px;
   border: none;
   background-color: white;
   color: currentColor;

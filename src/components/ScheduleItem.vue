@@ -119,11 +119,14 @@ export default {
 .schedule-item {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
 
   .schedule-item__control--time {
     input.display-time {
+      height: 100%;
       border: none;
+      font: inherit;
+      font-family: "Noto Sans", sans-serif;
+      text-align: center;
     }
   }
 }
@@ -137,15 +140,23 @@ export default {
 
   input {
     color: currentColor;
+    font: inherit;
   }
 }
 
 .schedule-item__control--text {
+  flex-basis: 100px;
   flex-grow: 1;
+  min-width: 0;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-right: 8px;
+  padding-left: 8px;
 }
 
 .schedule-item__control--button {
   display: grid;
+  flex: none;
   width: 40px;
   border: none;
   place-items: center;
@@ -160,7 +171,7 @@ export default {
 Variations
 */
 .schedule-item--outdated {
-  color: red;
+  color: #ff3333;
 }
 
 .schedule-item--add {
@@ -171,12 +182,13 @@ Variations
 
 .schedule-item--edit {
   .schedule-item__control {
+    height: 35px;
     border: none;
 
     &:hover {
       .schedule__icon {
         path {
-          fill: tomato;
+          fill: #ff3333;
         }
       }
     }
